@@ -174,11 +174,6 @@ ALTER TABLE ONLY public.services ALTER COLUMN service_id SET DEFAULT nextval('pu
 --
 
 COPY public.appointments (appointment_id, customer_id, service_id, "time") FROM stdin;
-2	18	1	11am
-3	19	1	10:30
-4	19	1	
-5	19	1	10:30
-6	19	2	11am
 \.
 
 
@@ -187,8 +182,6 @@ COPY public.appointments (appointment_id, customer_id, service_id, "time") FROM 
 --
 
 COPY public.customers (customer_id, phone, name) FROM stdin;
-18	581-980-1393	Karim
-19	555-555-5555	Fabio
 \.
 
 
@@ -207,14 +200,14 @@ COPY public.services (service_id, name) FROM stdin;
 -- Name: appointments_appointment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.appointments_appointment_id_seq', 6, true);
+SELECT pg_catalog.setval('public.appointments_appointment_id_seq', 13, true);
 
 
 --
 -- Name: customers_customer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.customers_customer_id_seq', 19, true);
+SELECT pg_catalog.setval('public.customers_customer_id_seq', 49, true);
 
 
 --
@@ -275,4 +268,5 @@ ALTER TABLE ONLY public.appointments
 --
 -- PostgreSQL database dump complete
 --
+
 
