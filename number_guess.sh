@@ -36,14 +36,20 @@ PLAY_ROUND() {
 
 REGISTER_GAME() {
   # Check if user exists
-  # If not, add him to users table
-
+  if [[ -z $USER_ID ]]; then
+    # If not, add him to users table
+    INSERT_USER_RESULT=$($PSQL "INSERT INTO users(name) VALUES('$USER_NAME')")
+    USER_ID=$($PSQL "SELECT user_id FROM users WHERE name='$USER_NAME'")
+  fi
   # register game to games table
+  INSERT_GAME_RESULT=$($PSQL "INSERT INTO games(user_id, move_count) VALUES($USER_ID, $CURRENT_MOVES)")
 }
 
 # Set random target number 
 TARGET=$(( RANDOM % 1000 + 1))
 CURRENT_MOVES=0
+
+echo -e "DEBUG - Target $TARGET"
 
 # Fetch user name
 echo "Enter your username:"
