@@ -28,7 +28,7 @@ fi
 
 if [[ -z $ELEMENT_ID ]]
 then
-  echo "Element not found"
+  echo "I could not find that element in the database."
 else
   echo "Element found"
 fi
