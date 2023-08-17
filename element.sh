@@ -30,5 +30,12 @@ if [[ -z $ELEMENT_ID ]]
 then
   echo "I could not find that element in the database."
 else
-  echo "Element found"
+  NAME=$($PSQL "SELECT name FROM elements WHERE atomic_number=$ELEMENT_ID")
+  SYMBOL=$($PSQL "SELECT symbol FROM elements WHERE atomic_number=$ELEMENT_ID")
+  TYPE=$($PSQL "SELECT type FROM properties WHERE atomic_number=$ELEMENT_ID")
+  MASS=$($PSQL "SELECT atomic_mass FROM properties WHERE atomic_number=$ELEMENT_ID")
+  MELT_TEMP=$($PSQL "SELECT melting_point_celsius FROM properties WHERE atomic_number=$ELEMENT_ID")
+  BOIL_TEMP=$($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number=$ELEMENT_ID")
+
 fi
+
