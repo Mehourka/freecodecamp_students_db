@@ -2,9 +2,14 @@
 # Program To insert new elemtns into periodic_table database
 
 PSQL="psql --no-align -t -U freecodecamp -d periodic_table -c"
-echo "Please provide an element as an argument."
-read ELEMENT
 
+if [[ ! $1 ]]; then
+  echo "Please provide an element as an argument."
+  exit
+fi
+
+
+ELEMENT=$1
 # Check if input is Atomic Number
 if [[ $ELEMENT =~ ^[0-9]+$ ]]; then
   ELEMENT_ID=$($PSQL "SELECT atomic_number FROM elements WHERE atomic_number=$ELEMENT")
