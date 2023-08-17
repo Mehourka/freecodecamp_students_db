@@ -37,5 +37,6 @@ else
   MELT_TEMP=$($PSQL "SELECT melting_point_celsius FROM properties WHERE atomic_number=$ELEMENT_ID")
   BOIL_TEMP=$($PSQL "SELECT boiling_point_celsius FROM properties WHERE atomic_number=$ELEMENT_ID")
 
+  echo "The element with atomic number $ELEMENT_ID is $NAME ($SYMBOL). It's a $TYPE, with a mass of $MASS amu. $NAME has a melting point of $MELT_TEMP celsius and a boiling point of $BOIL_TEMP celsius."
 fi
 
