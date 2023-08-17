@@ -10,6 +10,9 @@ PLAY_ROUND() {
     echo -e "$1"
   fi
 
+  # Increment number of moves
+  CURRENT_MOVES=$(( CURRENT_MOVES + 1 ))
+  
   # Fetch Guess from user
   read ROUND_GUESS
   # Check if it's an integer
@@ -26,27 +29,40 @@ PLAY_ROUND() {
     else
       echo "YOU WIN !!!";
       # Register the win in games table
+      REGISTER_GAME
     fi
   fi
 }
 
+REGISTER_GAME() {
+  # Check if user exists
+  # If not, add him to users table
+
+  # register game to games table
+}
+
 # Set random target number 
 TARGET=$(( RANDOM % 1000 + 1))
+CURRENT_MOVES=0
 
 # Fetch user name
 echo "Enter your username:"
 read USER_NAME
 
+# Get user ID
+USER_ID=$($PSQL "SELECT user_id FROM users WHERE name='$USER_NAME'")
+
 # If username exists
-if false; then
+if [[ ! -z $USER_ID ]]; then
   # gather user stats
+  GAME_COUNT=
+  BEST_SCORE=
   # print greeting and stats
   echo "Should not print"
 # else
 else
   # greet new user
   echo "Welcome, $USER_NAME! It looks like this is your first time here."
-  # register new user
 fi
 
 echo "Guess the secret number between 1 and 1000:"
