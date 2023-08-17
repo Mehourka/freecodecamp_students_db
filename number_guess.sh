@@ -23,11 +23,11 @@ PLAY_ROUND() {
   else
     # Check if win 
     if [[ TARGET -lt ROUND_GUESS ]]; then
-      PLAY_ROUND "It's lower thant that, guess again:"
+      PLAY_ROUND "It's lower than that, guess again:"
     elif [[ TARGET -gt ROUND_GUESS ]]; then
-      PLAY_ROUND "It's higher thant that, guess again:"
+      PLAY_ROUND "It's higher than that, guess again:"
     else
-      echo "YOU WIN !!!";
+      echo "You guessed it in $CURRENT_MOVES tries. The secret number was $TARGET. Nice job!";
       # Register the win in games table
       REGISTER_GAME
     fi
@@ -61,10 +61,10 @@ USER_ID=$($PSQL "SELECT user_id FROM users WHERE name='$USER_NAME'")
 # If username exists
 if [[ ! -z $USER_ID ]]; then
   # gather user stats
-  GAME_COUNT=
-  BEST_SCORE=
+  GAMES_PLAYED=$($PSQL "SELECT COUNT(*) FROM games WHERE user_id=$USER_ID")
+  BEST_GAME=$($PSQL "SELECT MIN(move_count) FROM games WHERE user_id=$USER_ID")
   # print greeting and stats
-  echo "Should not print"
+  echo "Welcome back, $USER_NAME! You have played $GAMES_PLAYED games, and your best game took $BEST_GAME guesses."
 # else
 else
   # greet new user
